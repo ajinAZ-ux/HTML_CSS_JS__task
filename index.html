@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>상품 관리 - 초보용</title>
+</head>
+<body>
+  <h2>신규 등록 상품</h2>
+
+  카테고리:
+  <select id="categorySelect">
+    <option value="">전체</option>
+    <option value="상의">상의</option>
+    <option value="하의">하의</option>
+    <option value="신발">신발</option>
+    <option value="패션잡화">패션잡화</option>
+  </select>
+
+  제품명: <input type="text" id="productInput" placeholder="제품명을 입력해주세요">
+  <button onclick="search()">조회</button>
+
+  <table border="1" id="productTable" style="margin-top: 10px;">
+    <tr>
+      <th>카테고리</th>
+      <th>브랜드</th>
+      <th>상품명</th>
+      <th>가격</th>
+    </tr>
+  </table>
+
+  <script>
+    // 데이터
+    var products = [
+      {category:"상의", brand:"Supreme", product:"슈프림 박스로고 후드티", price:"390,000"},
+      {category:"하의", brand:"DIESEL", product:"디젤 트랙 팬츠", price:"188,000"},
+      {category:"신발", brand:"Nike", product:"에어포스 1", price:"137,000"},
+      {category:"패션잡화", brand:"Music&Goods", product:"빵빵이 키링", price:"29,000"},
+      {category:"상의", brand:"Adidas", product:"아디다스 후드티", price:"120,000"}
+    ];
+
+    function renderTable(data) {
+      var table = document.getElementById('productTable');
+      
+      // 이전 내용 삭제 (첫 줄 제외)
+      table.innerHTML = "<tr><th>카테고리</th><th>브랜드</th><th>상품명</th><th>가격</th></tr>";
+
+      for (var i=0; i<data.length; i++) {
+        var row = table.insertRow();
+        row.insertCell(0).innerHTML = data[i].category;
+        row.insertCell(1).innerHTML = data[i].brand;
+        row.insertCell(2).innerHTML = data[i].product;
+        row.insertCell(3).innerHTML = data[i].price;
+      }
+    }
+
+    function search() {
+      var category = document.getElementById('categorySelect').value;
+      var name = document.getElementById('productInput').value;
+      var filtered = [];
+
+      for (var i=0; i<products.length; i++) {
+        if ((category=="" || products[i].category==category) &&
+            (name=="" || products[i].product.indexOf(name)!=-1)) {
+          filtered.push(products[i]);
+        }
+      }
+
+      renderTable(filtered);
+    }
+
+    // 처음 테이블 보여주기
+    renderTable(products);
+  </script>
+</body>
+</html>
