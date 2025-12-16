@@ -15,9 +15,24 @@
     <option value="신발">신발</option>
     <option value="패션잡화">패션잡화</option>
   </select>
+  <!--<select>여기서 하나를 고른다. 선택지들을 모아놓은 컨테이너박스/select>
+      <option>개별 선택지 </option>
+    관계로 표현시
+<select>
+ ├─ <option>
+ ├─ <option>
+ └─ <option>
+</select> 
+value는 프로그램이 받는 값이고, 사람에게 보이는 것은 태그 option의 시작태그, 마지막 태그 중간에 쓴다.
+value는 선택되었을 때 프로그램이 사용할 값을 명시적으로 지정하기 위해 존재한다.-->
+
+
 
   제품명: <input type="text" id="productInput" placeholder="제품명을 입력해주세요">
   <button onclick="search()">조회</button>
+<!--input기능 속의 티입, 아이디, 플레이스홀 설정
+버튼 기능속의 원클릭;  월클릭=__동작함수___;  클릭 시 실행될 함수 지정 =-->
+
 
   <table border="1" id="productTable" style="margin-top: 10px;">
     <tr>
@@ -27,9 +42,17 @@
       <th>가격</th>
     </tr>
   </table>
-
+<!--table은 화면표시용도, 기능속의 설정가능 속성은 border, id, style 이 지정가능함.
+티알과 티에이치는 각각 행단위의 데이터묶음, 열별 제목이 화면에 표시됨.
+<></>의 중간에 화면표시용 글자 쓰기
+기능별 해당 속성은 필요시 문서(mdn등)에서 찾아보기
+ -->
   <script>
-    // 데이터
+    <!--table에 데이터 연결해주는 과정: 집어넣을 테이터 처리, 집어넣을 테이터와 table을 연결해주는 함수 설정
+        product는 table의 열에 해당하는 메뉴들에 맞추어서 카테고리, 브랜드, 상품명, 가격을 설정하고
+        해당하는 행이 한줄씩 늘어날수록 {}로 처리한다. 
+        해당 열에 있는 찐데이터의 경우 해당열이름 : "" 순서대로 써서 설정가능핟
+        -->
     var products = [
       {category:"상의", brand:"Supreme", product:"슈프림 박스로고 후드티", price:"390,000"},
       {category:"하의", brand:"DIESEL", product:"디젤 트랙 팬츠", price:"188,000"},
@@ -40,8 +63,20 @@
 
     function renderTable(data) {
       var table = document.getElementById('productTable');
+      <!--펑션 렌더테이블은 "테이블 그리는 함수"이며 어떤 내용으로 그릴지는 ()안에 들어간다. 
+        상품의 데이터를 ()안에 넣어서 테이블을 그리는 함수 렌더테이블을 사용한다.
+        {}은 내용별 데이터에 어떤것이 있는지 알려주는 구간이다
+        여기서는 기호 =가 할당을 선언하는 구간이다.
+        document.getElementById('productTable')은 id 전용 검색 메서드이다.-->
+      
       
       // 이전 내용 삭제 (첫 줄 제외)
+      <!-- 동적인테이블을 만들고자 for문을 사용한다.
+        
+        
+        
+        for (var i=0; i<data.length; i++) 배열을 순서대로 반복한다. 세부뜯어보는건 나중에;; 
+        -->
       table.innerHTML = "<tr><th>카테고리</th><th>브랜드</th><th>상품명</th><th>가격</th></tr>";
 
       for (var i=0; i<data.length; i++) {
